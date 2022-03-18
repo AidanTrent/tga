@@ -63,7 +63,7 @@ struct TGAImg* makeImg(uint8_t idLength, uint8_t colorMapType,
 // Writes contents of a TGAImg struct to a image of name imageName
 void saveImage(char imageName[], struct TGAImg* img){
 	FILE* imageFile = fopen(imageName, "wb");
-	// WRITE HEADER
+
 	fwrite(&img->idLength, sizeof(img->idLength), 1, imageFile);
 	fwrite(&img->colorMapType, sizeof(img->colorMapType), 1, imageFile);
 	fwrite(&img->imageType, sizeof(img->imageType), 1, imageFile);
@@ -77,11 +77,12 @@ void saveImage(char imageName[], struct TGAImg* img){
 	fwrite(&img->imagePixelSize, sizeof(img->imagePixelSize), 1, imageFile);
 	fwrite(&img->imageDescriptorByte, sizeof(img->imageDescriptorByte), 1, imageFile);
 	fwrite(&img->imageDataField, img->width * img->height * (img->imagePixelSize / 8), 1, imageFile);
+
+	fclose(imageFile);
 }
 
 void setPixel(struct TGAImg* img, struct Color color, int x, int y){
 	uint32_t index = ((y * img->width) + x) * 3; // Convert x and y to index for array
-
 	// Apply pixel change to all colors
 	img->imageDataField[index] = color.blue;
 	img->imageDataField[index+1] = color.green;
