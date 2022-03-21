@@ -12,8 +12,8 @@ int main(void){
 	int width = 500;
 	int height = 500;
 
-	struct TGAImg* image = makeImg(0, 0, UNCOMP_RGB, 0, 0, 0, 0, 0, width, height, IMG_PIXEL_SIZE, 0);
-	struct Color color = {0,0,0};
+	TGAImg* image = makeImg(0, 0, UNCOMP_RGB, 0, 0, 0, 0, 0, width, height, IMG_PIXEL_SIZE, 0);
+	RGB color = {0,0,0};
 
 	float blueIntermediate = 0;
 	float redIntermediate = 0;
