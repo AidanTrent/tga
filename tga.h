@@ -2,7 +2,7 @@
 #define TGA_H
 #include <stdint.h>
 
-typedef struct TGAImg_t{
+typedef struct{
 	uint8_t idLength;			// Length of image ID field (0-255)
 	uint8_t colorMapType;		// If a color map is present (1) or not (0)
 	uint8_t imageType;			// Compression and color types (0-3 and 9-11)
@@ -19,13 +19,13 @@ typedef struct TGAImg_t{
 	uint32_t dataFieldBytes;	// Number of bytes taken up by the imageDataField. Not saved when exporting
 } TGAImg;
 
-typedef struct RGB_t{
-	uint8_t red;
-	uint8_t green;
+typedef struct{
 	uint8_t blue;
+	uint8_t green;
+	uint8_t red;
 } RGB;
 
-TGAImg* makeImg(uint8_t idLength, uint8_t colorMapType,
+TGAImg* makeImage(uint8_t idLength, uint8_t colorMapType,
 						uint8_t imageType, uint16_t colorMapOrigin,
 						uint16_t colorMapLength, uint8_t colorMapEntrySize,
 						uint16_t xOrigin, uint16_t yOrigin,

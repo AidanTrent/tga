@@ -12,7 +12,7 @@ int main(void){
 	int width = 500;
 	int height = 500;
 
-	TGAImg* image = makeImg(0, 0, UNCOMP_RGB, 0, 0, 0, 0, 0, width, height, IMG_PIXEL_SIZE, 0);
+	TGAImg* image = makeImage(0, 0, UNCOMP_RGB, 0, 0, 0, 0, 0, width, height, IMG_PIXEL_SIZE, 0);
 	RGB color = {0,0,0};
 
 	float blueIntermediate = 0;
