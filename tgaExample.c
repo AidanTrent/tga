@@ -9,10 +9,11 @@
 #define IMG_PIXEL_SIZE 24 // 24 bits for RGB. 32 bits for RGB+alpha (not implemented)
 
 int main(void){
-	int width = 500;
-	int height = 500;
+	int width = 30;
+	int height = 30;
 
-	TGAImg* image = makeImage(0, 0, UNCOMP_RGB, 0, 0, 0, 0, 0, width, height, IMG_PIXEL_SIZE, 0);
+	TGAHeader header = {0, 0, UNCOMP_RGB, 0, 0, 0, 0, 0, width, height, IMG_PIXEL_SIZE, 0};
+	TGAImg* image = makeImage(&header);
 	RGB color = {0,0,0};
 
 	float blueIntermediate = 0;
@@ -32,4 +33,8 @@ int main(void){
 	}
 
 	saveImage("testImage.tga", image);
+	TGAImg* image2 = loadImage("testImage.tga");
+	if (image2 != NULL){
+		saveImage("testImage2.tga", image2);
+	}
 }

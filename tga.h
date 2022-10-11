@@ -15,8 +15,11 @@ typedef struct{
 	uint16_t height;			// Height of the image in pixels
 	uint8_t imagePixelSize;		// Number of bits in a stored pixel index
 	uint8_t imageDescriptorByte;// Document says to just keep this byte as 0
-	uint8_t imageDataField[0];	// Array of image pixels.
-	uint32_t dataFieldBytes;	// Number of bytes taken up by the imageDataField. Not saved when exporting
+} TGAHeader;
+
+typedef struct{
+	TGAHeader header;
+	uint8_t imageDataField[];	// Array of image pixels.
 } TGAImg;
 
 typedef struct{
@@ -25,14 +28,14 @@ typedef struct{
 	uint8_t red;
 } RGB;
 
-TGAImg* makeImage(uint8_t idLength, uint8_t colorMapType,
-						uint8_t imageType, uint16_t colorMapOrigin,
-						uint16_t colorMapLength, uint8_t colorMapEntrySize,
-						uint16_t xOrigin, uint16_t yOrigin,
-						uint16_t width, uint16_t height,
-						uint8_t imagePixelSize, uint8_t imageDescriptorByte);
+TGAImg* makeImage(TGAHeader* hd);
 
+// Writes contents of a TGAImg struct to a image of name imgName
 void saveImage(char imageName[], TGAImg* img);
 
-void setPixel(TGAImg* img, RGB color, int x, int y);
+TGAImg* loadImage(char imgName[]);
+
+void setPixel(TGAImg* img, RGB color, uint16_t x, uint16_t y);
+
+RGB getPixel(TGAImg* img, uint16_t x, uint16_t y);
 #endif
