@@ -8,7 +8,6 @@
 #include <stdint.h>
 #include <string.h>
 
-#define HEADER_BYTES 18 // Ammount of bytes header will take up
 typedef struct{
 	uint8_t idLength;			// Length of image ID field (0-255)
 	uint8_t colorMapType;		// If a color map is present (1) or not (0)
@@ -38,7 +37,7 @@ typedef struct{
 TGAImg* makeImage(TGAHeader* hd){
 	// Allocate memory for header + image pixels (using info from header params)
 	uint_fast32_t dataFieldBytes = hd->width * hd->height * (hd->imagePixelSize / 8);
-	TGAImg* img = calloc(HEADER_BYTES + dataFieldBytes, 1 );
+	TGAImg* img = calloc(sizeof(TGAHeader) + dataFieldBytes, 1 );
 	if (!img){
 		fprintf(stderr, "ERROR: calloc fail for img @ makeImage\n");
 		return(NULL);
